@@ -4,6 +4,7 @@ from scipy import stats
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import math
+import numpy
 
 
 #Defining the the app and seting the geometry

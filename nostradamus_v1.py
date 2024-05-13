@@ -8,7 +8,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import math
 import tkinter
-
+import numpy
 
 
 #Defining the the app and seting the geometry
