@@ -1,16 +1,13 @@
 #imports
-from curses.textpad import Textbox
-
 import customtkinter
 from customtkinter import*
 from scipy import stats
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import math
-import tkinter
+from CTkMessagebox import CTkMessagebox
 
-
-#Defining the the app and seting the geometry
+#Defining the the app and seting the geometry including appearance colour.
 app = CTk()
 app.title("The Nostradamus")
 app.geometry("2560x1600")
@@ -107,6 +104,7 @@ def predict(): #when button is clicked it predicts the third grade based of two 
           0.526315789, 0.631578947, 0.368421053, 0.631578947, 0.578947368, 0.263157895, 0.947368421, 0.421052632,0.736842105,
           0.473684211, 0.789473684, 0.526315789, 0.736842105, 0.315789474, 0.578947368, 0.263157895, 0.263157895,0.473684211,
           0.263157895, 0.263157895, 0.473684211, 0.263157895, 0.473684211, 0.842105263, 0.421052632, 0.631578947,0.473684211]
+
     slope, intercept, r, p, std_err = stats.linregress(xx, y)
 
     def myfunc(x):
@@ -126,131 +124,61 @@ def predict(): #when button is clicked it predicts the third grade based of two 
     print('Grade 1:', predict)
 
     predicted = math.trunc(((predict+predict2)/2)*100)
+    if int(entry.get()) > 100 or int(entry2.get()) > 100:
+        CTkMessagebox(title="That's an Error!", message="PLease enter only a number between 0 and 100.")
 
-    if predicted >= 91:
-        print('You recieved', str(predicted) + '%' + ',', 'which is an Outstanding')
-        color = '#00ff00'
-        text = 'Oustanding'
+    elif int(entry.get())
 
-    elif predicted < 91 and predicted >= 82:
-        print('You recieved', str(grade) + '%' + ',', ' which is an Excellent')
-        color = '#00ffff'
-        text = 'Excellent'
-    elif predicted < 82 and predicted >= 73:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Very Good')
-        color = '#c27ba0'
-        text = 'Very Good'
-    elif predicted < 73 and predicted >= 64:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Good')
-        color = '#8e7cc3'
-        text = 'Good'
-    elif predicted < 64 and predicted >= 55:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Competent')
-        color = '#ffffff'
-        text = 'Competent'
-    elif predicted < 55 and predicted >= 46:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Satisfactory')
-        color = '#ffff00'
-        text = 'Satisfactory'
-    elif predicted < 46 and predicted >= 35:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Below Standard')
-        color = '#ff9900'
-        text = 'Below Standard'
     else:
-        print('You recieved', str(predicted) + '%' + ',', ' which is a Not Demonstrated')
-        color = '#ff0000'
-        text = 'Not Demonstrated'
+        if predicted >= 91:
+            print('You recieved', str(predicted) + '%' + ',', 'which is an Outstanding')
+            color = '#00ff00'
+            text = 'Oustanding'
 
-    label3.configure(text=str(predicted)+'%', text_color=color)
-    label4.configure(text=text, text_color=color)
+        elif predicted < 91 and predicted >= 82:
+            print('You recieved', str(predicted) + '%' + ',', ' which is an Excellent')
+            color = '#00ffff'
+            text = 'Excellent'
+        elif predicted < 82 and predicted >= 73:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Very Good')
+            color = '#c27ba0'
+            text = 'Very Good'
+        elif predicted < 73 and predicted >= 64:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Good')
+            color = '#8e7cc3'
+            text = 'Good'
+        elif predicted < 64 and predicted >= 55:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Competent')
+            color = '#ffffff'
+            text = 'Competent'
+        elif predicted < 55 and predicted >= 46:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Satisfactory')
+            color = '#ffff00'
+            text = 'Satisfactory'
+        elif predicted < 46 and predicted >= 35:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Below Standard')
+            color = '#ff9900'
+            text = 'Below Standard'
+        else:
+            print('You recieved', str(predicted) + '%' + ',', ' which is a Not Demonstrated')
+            color = '#ff0000'
+            text = 'Not Demonstrated'
 
+        label3.configure(text=str(predicted) + '%', text_color=color)
+        label4.configure(text=text, text_color=color)
 
-    fig_1 = Figure(figsize=(6.2,3.4))
-    ax_1 = fig_1.add_subplot()
-    ax_1.scatter(x,y)
-    ax_1.plot(x, mymodel)
+        fig_1 = Figure(figsize=(6.2, 3.4))
+        ax_1 = fig_1.add_subplot()
+        ax_1.scatter(x, y)
+        ax_1.plot(x, mymodel)
 
-    canvas = FigureCanvasTkAgg(fig_1, master=frame)
-    canvas.draw()
-    canvas.get_tk_widget().place(relx=.5, rely= .43)
-def predict_studytime():
-    y = [0.3, 0.3, 0.5, 0.75, 0.5, 0.75, 0.55, 0.3, 0.95, 0.75, 0.45, 0.6, 0.7, 0.55, 0.8, 0.7, 0.7, 0.5, 0.25, 0.5,
-         0.75, 0.75, 0.8, 0.6, 0.4, 0.4, 0.55, 0.75, 0.55, 0.55, 0.6, 0.85, 0.8, 0.6, 0.75, 0.3, 0.9, 0.75, 0.55, 0.65,
-         0.55, 0.6, 0.9, 0.55, 0.45, 0.3, 0.55, 1, 0.7, 0.35, 0.65, 0.65, 0.5, 0.55, 0.65, 0.5, 0.75, 0.75, 0.45, 0.8,
-         0.55, 0.55, 0.45, 0.45, 0.5, 0.75, 0.6, 0.3, 0.4, 0.8, 0.75, 0.5, 0.25, 0.7, 0.55, 0.5, 0.5, 0.55, 0.5, 0.25,
-         0.6, 0.55, 0.3, 0.75, 0.5, 0.4, 0.3, 0.7, 0.5, 0.35, 0.4, 0.9, 0.3, 0.5, 0.7, 0.5, 0.75, 0.5, 0.7, 0.4, 0.25,
-         0.85, 0.7, 0.3, 0.9, 0.55, 0.4, 0.9, 0.65, 0.8, 0.95, 0.5, 0.65, 0.95, 0.45, 0.8, 0.7, 0.65, 0.4, 0.65, 0.75,
-         0.75, 0.65, 0.65, 0.4, 0.6, 0.55, 0.45, 0, 0.9, 0, 0, 0.6, 0.55, 0, 0, 0, 0, 0.6, 0.75, 0, 0.45, 0.55, 0.65, 0,
-         0.55, 0, 0.55, 0, 0.5, 0, 0.7, 0.5, 0, 0.6, 0.4, 0.65, 0.5, 0.75, 0.6, 0, 0.35, 0, 0.5, 0.35, 0.6, 0.5, 0.8, 0,
-         0.7, 0, 0.8, 0.5, 0, 0.45, 0.45, 0.55, 0.3, 0.45, 0.55, 0.4, 0.6, 0.85, 0.4, 0.6, 0.55, 0.55, 0.75, 0.45, 0.5,
-         0.65, 0.45, 0.4, 0.5, 0.7, 0.75, 0.8, 0.5, 0.9, 0.5, 0.8, 0.5, 0.5, 0.3, 0.55, 0.45, 0.35, 0.65, 0.5, 0.35,
-         0.4, 0.65, 0.7, 0.4, 0.5, 0.75, 0.2, 0.4, 0.4, 0.5, 0.3, 0, 0.85, 0.65, 0.7, 0.35, 0.75, 0.6, 0.45, 0.6, 0.7,
-         0.55, 0.45, 0.65, 0.3, 0.5, 0.65, 0.6, 0.55, 0, 0.6, 0.6, 0, 0.6, 0, 0.9, 0.65, 0.4, 0.25, 0.75, 0.4, 0.5, 0.4,
-         0.4, 0.6, 0.4, 0.65, 0.55, 0.7, 0, 0.9, 0.4, 0.6, 0.45, 0, 0.85, 0.5, 0.55, 0.5, 0, 0.45, 0.7, 0.55, 0.7, 0.5,
-         0.6, 0.45, 0.45, 0.4, 0.5, 0.4, 0.5, 0.6, 0.5, 0.55, 0.55, 0.95, 0.6, 0.7, 0.75, 0.55, 0.75, 0.65, 0.9, 0.7,
-         0.55, 0, 0.4, 0.7, 0.8, 0.55, 0.5, 0.7, 0.9, 0.65, 0.6, 0.9, 0.4, 0.6, 0.5, 0, 0.65, 0.55, 0.55, 0.65, 0.55, 0,
-         0.45, 0.5, 0.55, 0.65, 0.45, 0.55, 0.75, 0.75, 0.55, 0.8, 0.5, 0.45, 0.7, 0.4, 0.7, 0, 0, 0, 0.75, 0.65, 0,
-         0.85, 0.5, 0.55, 0, 0.75, 0, 0.5, 0.7, 0.8, 0.45, 0.75, 0.65, 0.4, 0.65, 0.4, 0.4, 0.55, 0.45, 0.65, 0.55, 0.5,
-         0.8, 0.65, 0.6, 0.5, 0.75, 0.6, 0.5, 0.65, 0, 0.5, 0.55, 0.45, 0.6, 0.55, 0.25, 0.95, 0.5, 0.75, 0.5, 0.75,
-         0.5, 0.7, 0.35, 0.5, 0, 0.25, 0.5, 0.3, 0, 0.4, 0, 0.45, 0.8, 0.35, 0.5, 0.45]
-
-    '''x = [2,2,2,3,2,2,2,2,2,2,2,3,1,2,3,1,3,2,1,1,2,1,2,2,3,1,1,1,2,2,2,2,2,2,1,1,3,3,3,1,2,1,2,1,2,2,2,4,2,2,2,2,1,1,1,
-         2,2,2,2,2,2,1,2,3,2,2,4,4,2,4,4,4,2,1,2,2,4,4,1,2,1,3,2,2,2,2,2,3,2,2,3,1,2,2,4,4,1,2,1,3,1,3,1,2,2,4,4,3,4,3,
-         1,3,2,1,2,2,2,1,2,1,2,4,2,1,2,1,2,2,1,1,3,1,1,1,2,3,2,1,2,1,4,1,3,1,1,2,2,2,1,1,1,1,3,1,1,2,1,1,1,2,1,2,1,1,2,
-         1,2,2,2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,1,1,2,1,1,1,2,2,2,2,1,4,3,2,2,1,3,4,2,2,2,1,2,2,2,1,3,
-         2,3,2,2,3,2,2,2,2,3,2,2,2,2,2,3,2,1,2,2,2,2,1,1,3,1,1,1,2,1,1,2,1,1,1,1,4,2,2,4,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,
-         2,2,1,2,1,1,1,4,2,2,2,3,3,3,2,2,3,2,4,3,1,2,2,4,1,2,1,3,4,2,2,1,1,2,2,2,2,2,2,3,3,2,3,3,2,2,2,3,3,3,3,1,1,3,3,
-         4,3,2,2,4,3,3,2,4,2,3,2,2,2,3,3,3,3,3,1,2,2,1,1,2,2,2,2,1,3,2,2,2,2,2,2,3,1,1,2,2,1,3,1,3,3,3,2,2,2,2,1,2,1,1,
-         3,1,3,2,2,2,1,1,1,1]'''
-
-    x =[0.333333333,0.333333333,0.333333333,0.666666667,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,
-        0.333333333,0.666666667,0,0.333333333,0.666666667,0,0.666666667,0.333333333,0,0,0.333333333,0,0.333333333,0.333333333,
-        0.666666667,0,0,0,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0,0,0.666666667,0.666666667,
-        0.666666667,0,0.333333333,0,0.333333333,0,0.333333333,0.333333333,0.333333333,1,0.333333333,0.333333333,0.333333333,
-        0.333333333,0,0,0,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0,0.333333333,0.666666667,
-        0.333333333,0.333333333,1,1,0.333333333,1,1,1,0.333333333,0,0.333333333,0.333333333,1,1,0,0.333333333,0,0.666666667,
-        0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.666666667,0.333333333,0.333333333,0.666666667,0,0.333333333,
-        0.333333333,1,1,0,0.333333333,0,0.666666667,0,0.666666667,0,0.333333333,0.333333333,1,1,0.666666667,1,0.666666667,0,
-        0.666666667,0.333333333,0,0.333333333,0.333333333,0.333333333,0,0.333333333,0,0.333333333,1,0.333333333,0,0.333333333,0,
-        0.333333333,0.333333333,0,0,0.666666667,0,0,0,0.333333333,0.666666667,0.333333333,0,0.333333333,0,1,0,0.666666667,
-        0,0,0.333333333,0.333333333,0.333333333,0,0,0,0,0.666666667,0,0,0.333333333,0,0,0,0.333333333,0,0.333333333,0,0,
-        0.333333333,0,0.333333333,0.333333333,0.333333333,0.333333333,0,0.333333333,0.333333333,0.333333333,0.333333333,
-        0.333333333,0.333333333,0.333333333,0,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,
-        0.333333333,0,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0,0,0.333333333,0,0,0,0.333333333,
-        0.333333333,0.333333333,0.333333333,0,1,0.666666667,0.333333333,0.333333333,0,0.666666667,1,0.333333333,0.333333333,
-        0.333333333,0,0.333333333,0.333333333,0.333333333,0,0.666666667,0.333333333,0.666666667,0.333333333,0.333333333,
-        0.666666667,0.333333333,0.333333333,0.333333333,0.333333333,0.666666667,0.333333333,0.333333333,0.333333333,0.333333333,
-        0.333333333,0.666666667,0.333333333,0,0.333333333,0.333333333,0.333333333,0.333333333,0,0,0.666666667,0,0,0,0.333333333,
-        0,0,0.333333333,0,0,0,0,1,0.333333333,0.333333333,1,0.333333333,0.333333333,0.666666667,0.666666667,0.666666667,
-        0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,1,0.333333333,0.333333333,0.333333333,
-        0.333333333,0.333333333,0,0.333333333,0,0,0,1,0.333333333,0.333333333,0.333333333,0.666666667,0.666666667,0.666666667,
-        0.333333333,0.333333333,0.666666667,0.333333333,1,0.666666667,0,0.333333333,0.333333333,1,0,0.333333333,0,0.666666667,
-        1,0.333333333,0.333333333,0,0,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.333333333,0.666666667,
-        0.666666667,0.333333333,0.666666667,0.666666667,0.333333333,0.333333333,0.333333333,0.666666667,0.666666667,0.666666667,
-        0.666666667,0,0,0.666666667,0.666666667,1,0.666666667,0.333333333,0.333333333,1,0.666666667,0.666666667,0.333333333,
-        1,0.333333333,0.666666667,0.333333333,0.333333333,0.333333333,0.666666667,0.666666667,0.666666667,0.666666667,0.666666667,
-        0,0.333333333,0.333333333,0,0,0.333333333,0.333333333,0.333333333,0.333333333,0,0.666666667,0.333333333,0.333333333,
-        0.333333333,0.333333333,0.333333333,0.333333333,0.666666667,0,0,0.333333333,0.333333333,0,0.666666667,0,0.666666667,
-        0.666666667,0.666666667,0.333333333,0.333333333,0.333333333,0.333333333,0,0.333333333,0,0,0.666666667,0,0.666666667,
-        0.333333333,0.333333333,0.333333333,0,0,0,0 ]
-    min = 1
-    max = 4
-
-    slope, intercept, r, p, std_err = stats.linregress(x, y)
-
-    def myfunc(x):
-        return slope * x + intercept
-
-    mymodel = list(map(myfunc, x))
-
-    value = (entry3.get())
-
-    predict = myfunc(int(entry3.get()))
-    print(slope)
-    print('Studytime', predict)
+        canvas = FigureCanvasTkAgg(fig_1, master=frame)
+        canvas.draw()
+        canvas.get_tk_widget().place(relx=.5, rely=.43)
 
 
-#Start creating the User interface using custom tkinter
+
+#Create the User interface using custom tkinter
 
 #Frames
 frame = CTkFrame(master=app, fg_color='#323231', border_color='#323231', border_width=2, width=2560, height=1600,)
@@ -264,20 +192,18 @@ my_font = customtkinter.CTkFont(family="sans serif", size=75, weight="bold", )
 
 my_font2 = customtkinter.CTkFont(family="sans serif", size=25, weight="normal",)
 
-#Entry boxesR
+#Entry boxes
 entry = CTkEntry(master=frame, placeholder_text="Input first grade", width=185, fg_color='#0fa4af',border_color='#0d737a',text_color="black", placeholder_text_color='black', font=(my_font2, 20))
 entry.place(relx=0.328, rely=0.6, anchor=E)
 entry2 = CTkEntry(master=frame, placeholder_text="Input second grade", width=185, fg_color='#0fa4af',border_color='#0d737a',text_color="black", placeholder_text_color='black', font=(my_font2, 20))
 entry2.place(relx=0.328, rely=0.63, anchor=E)
 
-entry3 = CTkEntry(master=frame, placeholder_text="Input daily study time", width=185, fg_color='#0fa4af',border_color='#0d737a',text_color="black", placeholder_text_color='black', font=(my_font2, 20))
-entry3.place(relx=0.328, rely=0.66, anchor=E)
 
 #Button to control the entry data
-btn = CTkButton(master=frame, text="Submit", command=predict_studytime, fg_color="#0fa4af",border_color='#0d737a', border_width=2,hover_color='#024950', text_color="#000000", height=40, font=(my_font2, 25))
+btn = CTkButton(master=frame, text="Submit", command=predict, fg_color="#0fa4af",border_color='#0d737a', border_width=2,hover_color='#024950', text_color="#000000", height=40, font=(my_font2, 25))
 btn.place(relx=0.284, rely=0.7, anchor='s')
 
-#Label
+#Labels
 label = CTkLabel(master=frame, text="The", font=my_font)
 label.place(relx=0.28, rely=0.3, anchor=CENTER)
 
@@ -294,6 +220,6 @@ label3.place(relx=0.6, rely=0.3, anchor=CENTER)
 label4 = CTkLabel(master=frame2, text="Your Result", font=(my_font2))
 label4.place(relx=0.6, rely=0.6, anchor=CENTER)
 
-
+#All code mus be written before the mainloop.
 app.mainloop()
 
