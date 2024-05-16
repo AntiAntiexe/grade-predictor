@@ -113,29 +113,30 @@ def predict(): #when button is clicked it predicts the third grade based of two 
         return slope * x + intercept
 
     mymodel = list(map(myfunc, xx))
-
-    predict2 = myfunc((float(entry2.get()))/100)
-
-    slope, intercept, r, p, std_err = stats.linregress(x, y)
-
-    mymodel = list(map(myfunc, x))
-
-    predict = myfunc((float(entry.get()))/100)
-
-    print('Grade 2:', predict2)
-    print('Grade 1:', predict)
-
-    predicted = math.trunc(((predict+predict2)/2)*100)
-    '''
-            Define the different errors that could occur during the program
-                - enters a number less than 0
-                - enters a number greater than 100
-    '''
-    if int(entry.get()) > 100 or int(entry2.get()) > 100:
+    if entry.get().isnumeric() != True or entry2.get().isnumeric() != True:
+        CTkMessagebox(title="That's an Error!", message="Please enter only a number")
+    elif int(entry.get()) > 100 or int(entry2.get()) > 100:
         CTkMessagebox(title="That's an Error!", message="Please enter only a number between 0 and 100.")
     elif int(entry.get()) < 0 or int(entry2.get()) < 0:
         CTkMessagebox(title="That's an Error!", message="Please enter only a number between 0 and 100.")
     else:
+        predict2 = myfunc((float(entry2.get())) / 100)
+
+        slope, intercept, r, p, std_err = stats.linregress(x, y)
+
+        mymodel = list(map(myfunc, x))
+
+        predict = myfunc((float(entry.get())) / 100)
+
+        print('Grade 2:', predict2)
+        print('Grade 1:', predict)
+
+        predicted = math.trunc(((predict + predict2) / 2) * 100)
+        '''
+                Define the different errors that could occur during the program
+                    - enters a number less than 0
+                    - enters a number greater than 100
+        '''
         if predicted >= 91:
             print('You recieved', str(predicted) + '%' + ',', 'which is an Outstanding')
             color = '#00ff00'
@@ -168,21 +169,27 @@ def predict(): #when button is clicked it predicts the third grade based of two 
             print('You recieved', str(predicted) + '%' + ',', ' which is a Not Demonstrated')
             color = '#ff0000'
             result = 'Not Demonstrated'
-
-        #Configure the labels to display the final grade
+        # Configure the labels to display the final grade
         label3.configure(text=str(predicted) + '%', text_color=color)
         label4.configure(text=result, text_color=color)
 
-        #Prepare the graph by scattering the data and ploting the line.
+        # Prepare the graph by scattering the data and ploting the line.
         fig_1 = Figure(figsize=(6.2, 3.4))
         ax_1 = fig_1.add_subplot()
         ax_1.scatter(x, y)
         ax_1.plot(x, mymodel, color='green')
 
-        #Display the graph on the app.
+        # Display the graph on the app.
         canvas = FigureCanvasTkAgg(fig_1, master=frame)
         canvas.draw()
         canvas.get_tk_widget().place(relx=.5, rely=.43)
+
+
+
+
+
+
+
 
 
 
