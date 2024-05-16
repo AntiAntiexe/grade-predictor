@@ -15,6 +15,7 @@ set_appearance_mode("dark")
 
 #Predict Function using scipy stats
 def predict(): #when button is clicked it predicts the third grade based of two values given then averages the result.
+    #Final (Third Grade) data set which is the grade which is being predicted
     y = [0.3, 0.3, 0.5, 0.75, 0.5, 0.75, 0.55, 0.3, 0.95, 0.75, 0.45, 0.6, 0.7, 0.55, 0.8, 0.7, 0.7, 0.5, 0.25, 0.5,
          0.75, 0.75, 0.8, 0.6, 0.4, 0.4, 0.55, 0.75, 0.55, 0.55, 0.6, 0.85, 0.8, 0.6, 0.75, 0.3, 0.9, 0.75, 0.55, 0.65,
          0.55, 0.6, 0.9, 0.55, 0.45, 0.3, 0.55, 1, 0.7, 0.35, 0.65, 0.65, 0.5, 0.55, 0.65, 0.5, 0.75, 0.75, 0.45, 0.8,
@@ -34,7 +35,7 @@ def predict(): #when button is clicked it predicts the third grade based of two 
          0.85, 0.5, 0.55, 0, 0.75, 0, 0.5, 0.7, 0.8, 0.45, 0.75, 0.65, 0.4, 0.65, 0.4, 0.4, 0.55, 0.45, 0.65, 0.55, 0.5,
          0.8, 0.65, 0.6, 0.5, 0.75, 0.6, 0.5, 0.65, 0, 0.5, 0.55, 0.45, 0.6, 0.55, 0.25, 0.95, 0.5, 0.75, 0.5, 0.75,
          0.5, 0.7, 0.35, 0.5, 0, 0.25, 0.5, 0.3, 0, 0.4, 0, 0.45, 0.8, 0.35, 0.5, 0.45]
-
+    #First grade data stored as a list
     x = [0.125, 0.125, 0.25, 0.75, 0.1875, 0.75, 0.5625, 0.1875, 0.8125, 0.6875, 0.4375, 0.4375, 0.6875, 0.4375, 0.6875,
          0.6875, 0.625, 0.3125, 0.1875, 0.3125, 0.625, 0.5625, 0.75, 0.625, 0.4375, 0.1875, 0.5625, 0.75, 0.5, 0.4375,
          0.375, 0.875, 0.875, 0.3125, 0.5625, 0.3125, 0.75, 0.75, 0.5625, 0.6875, 0.25, 0.5625, 1, 0.3125, 0.4375,
@@ -61,7 +62,7 @@ def predict(): #when button is clicked it predicts the third grade based of two 
          0.3125, 0.625, 0.3125, 0.3125, 0.625, 0.4375, 0.5625, 0.5625, 0.4375, 0.9375, 0.625, 0.625, 0.5, 0.8125,
          0.5625, 0.4375, 0.625, 0.25, 0.5, 0.6875, 0.25, 0.6875, 0.625, 0.1875, 1, 0.3125, 0.75, 0.3125, 0.75, 0.4375,
          0.75, 0.25, 0.5, 0.1875, 0.1875, 0.4375, 0.1875, 0.25, 0.25, 0.1875, 0.375, 0.6875, 0.4375, 0.5, 0.3125]
-
+    #Second Grade data stored in a list
     xx = [0.315789474, 0.263157895, 0.421052632, 0.736842105, 0.526315789, 0.789473684, 0.631578947, 0.263157895,0.947368421,
           0.789473684, 0.421052632, 0.631578947, 0.736842105, 0.526315789, 0.842105263, 0.736842105, 0.736842105,0.526315789,
           0.263157895, 0.526315789, 0.736842105, 0.789473684, 0.789473684, 0.684210526, 0.473684211, 0.473684211,0.631578947,
@@ -105,8 +106,9 @@ def predict(): #when button is clicked it predicts the third grade based of two 
           0.473684211, 0.789473684, 0.526315789, 0.736842105, 0.315789474, 0.578947368, 0.263157895, 0.263157895,0.473684211,
           0.263157895, 0.263157895, 0.473684211, 0.263157895, 0.473684211, 0.842105263, 0.421052632, 0.631578947,0.473684211]
 
+    # Defining the different aspects of a linear graph
     slope, intercept, r, p, std_err = stats.linregress(xx, y)
-
+    #Creating the linear rule: y = mx+c
     def myfunc(x):
         return slope * x + intercept
 
@@ -124,54 +126,60 @@ def predict(): #when button is clicked it predicts the third grade based of two 
     print('Grade 1:', predict)
 
     predicted = math.trunc(((predict+predict2)/2)*100)
+    '''
+            Define the different errors that could occur during the program
+                - enters a number less than 0
+                - enters a number greater than 100
+    '''
     if int(entry.get()) > 100 or int(entry2.get()) > 100:
-        CTkMessagebox(title="That's an Error!", message="PLease enter only a number between 0 and 100.")
-
-    elif int(entry.get())
-
+        CTkMessagebox(title="That's an Error!", message="Please enter only a number between 0 and 100.")
+    elif int(entry.get()) < 0 or int(entry2.get()) < 0:
+        CTkMessagebox(title="That's an Error!", message="Please enter only a number between 0 and 100.")
     else:
         if predicted >= 91:
             print('You recieved', str(predicted) + '%' + ',', 'which is an Outstanding')
             color = '#00ff00'
-            text = 'Oustanding'
-
+            result = 'Oustanding'
         elif predicted < 91 and predicted >= 82:
             print('You recieved', str(predicted) + '%' + ',', ' which is an Excellent')
             color = '#00ffff'
-            text = 'Excellent'
+            result = 'Excellent'
         elif predicted < 82 and predicted >= 73:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Very Good')
             color = '#c27ba0'
-            text = 'Very Good'
+            result = 'Very Good'
         elif predicted < 73 and predicted >= 64:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Good')
             color = '#8e7cc3'
-            text = 'Good'
+            result = 'Good'
         elif predicted < 64 and predicted >= 55:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Competent')
             color = '#ffffff'
-            text = 'Competent'
+            result = 'Competent'
         elif predicted < 55 and predicted >= 46:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Satisfactory')
             color = '#ffff00'
-            text = 'Satisfactory'
+            result = 'Satisfactory'
         elif predicted < 46 and predicted >= 35:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Below Standard')
             color = '#ff9900'
-            text = 'Below Standard'
+            result = 'Below Standard'
         else:
             print('You recieved', str(predicted) + '%' + ',', ' which is a Not Demonstrated')
             color = '#ff0000'
-            text = 'Not Demonstrated'
+            result = 'Not Demonstrated'
 
+        #Configure the labels to display the final grade
         label3.configure(text=str(predicted) + '%', text_color=color)
-        label4.configure(text=text, text_color=color)
+        label4.configure(text=result, text_color=color)
 
+        #Prepare the graph by scattering the data and ploting the line.
         fig_1 = Figure(figsize=(6.2, 3.4))
         ax_1 = fig_1.add_subplot()
         ax_1.scatter(x, y)
-        ax_1.plot(x, mymodel)
+        ax_1.plot(x, mymodel, color='green')
 
+        #Display the graph on the app.
         canvas = FigureCanvasTkAgg(fig_1, master=frame)
         canvas.draw()
         canvas.get_tk_widget().place(relx=.5, rely=.43)
