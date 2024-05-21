@@ -12,9 +12,16 @@ app = CTk()
 app.title("The Nostradamus")
 app.geometry("2560x1600")
 set_appearance_mode("dark")
+'''
+Function takes two first creates the linear rule relating the two x data sets x and xx with the y data set.
+It uses this linear rule to then calculate the y value if the x value is (G1 or G2).
+G1 = entry.get()
+G2 = entry2.get()
 
-#Predict Function using scipy stats
-def predict(): #when button is clicked it predicts the third grade based of two values given then averages the result.
+Then it averages the two predicted results and displays it on the UI
+Based of the result it will display the GWSC grade value aswell.
+'''
+def predict():
     #Final (Third Grade) data set which is the grade which is being predicted
     y = [0.3, 0.3, 0.5, 0.75, 0.5, 0.75, 0.55, 0.3, 0.95, 0.75, 0.45, 0.6, 0.7, 0.55, 0.8, 0.7, 0.7, 0.5, 0.25, 0.5,
          0.75, 0.75, 0.8, 0.6, 0.4, 0.4, 0.55, 0.75, 0.55, 0.55, 0.6, 0.85, 0.8, 0.6, 0.75, 0.3, 0.9, 0.75, 0.55, 0.65,
