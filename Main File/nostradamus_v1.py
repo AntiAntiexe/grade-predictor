@@ -225,14 +225,14 @@ my_font = customtkinter.CTkFont(family="sans serif", size=75, weight="bold", )
 my_font2 = customtkinter.CTkFont(family="sans serif", size=25, weight="normal",)
 
 # Entry boxes
-entry = CTkEntry(master=frame, placeholder_text="Input first grade", width=185, fg_color='#0fa4af', border_color='#0d737a', text_color="black", placeholder_text_color='black', font=(my_font2, 20))
+entry = CTkEntry(master=frame, placeholder_text="Input first grade", width=185, fg_color='#0fa4af', border_color='#0d737a', text_color="black", placeholder_text_color='#323231', font=(my_font2, 20))
 entry.place(relx=0.328, rely=0.6, anchor=E)
-entry2 = CTkEntry(master=frame, placeholder_text="Input second grade", width=185, fg_color='#0fa4af', border_color='#0d737a', text_color="black", placeholder_text_color='black', font=(my_font2, 20))
+entry2 = CTkEntry(master=frame, placeholder_text="Input second grade", width=185, fg_color='#0fa4af', border_color='#0d737a', text_color="black", placeholder_text_color='#323231', font=(my_font2, 20))
 entry2.place(relx=0.328, rely=0.63, anchor=E)
 
 
 # Button to control the entry data
-btn = CTkButton(master=frame, text="Submit", command=predict, fg_color="#0fa4af", border_color='#0d737a', border_width=2, hover_color='#024950', text_color="#000000", height=40, font=(my_font2, 25))
+btn = CTkButton(master=frame, text="Submit", command=predict, fg_color="#0fa4af", border_color='#0d737a', border_width=2, hover_color='#024950', text_color="#323231", height=40, font=(my_font2, 25))
 btn.place(relx=0.284, rely=0.7, anchor='s')
 
 # Labels
@@ -243,7 +243,7 @@ label1 = CTkLabel(master=frame, text="Nostradamus.", font=my_font, text_color='#
 label1.place(relx=0.35, rely=0.35, anchor=CENTER)
 
 
-label2 = CTkLabel(master=frame, text="The Nostradamus is an accurate grade predictor. This grade predictor uses a data base of 1,188 grades collected from a reliable source developed for machine learning applications. This can be used by inputting your two recent grades which will predict your third grade. It will also display the graph used to predict your grade!", wraplength=550, justify='left', font=my_font2, width=20, height=25)
+label2 = CTkLabel(master=frame, text="The Nostradamus is an accurate grade predictor. This grade predictor uses a data base of 1,188 grades collected from a reliable source developed for machine learning applications. This can be used by inputting your two recent grades which will predict your third grade. It will also display the graph used to predict your grade with your grade highlighted!", wraplength=550, justify='left', font=my_font2, width=20, height=25)
 label2.place(relx=0.36, rely=0.49, anchor=CENTER)
 
 label3 = CTkLabel(master=frame2, text="0%", font=my_font, text_color='#0fa4af')
@@ -254,5 +254,6 @@ label4.place(relx=0.6, rely=0.6, anchor=CENTER)
 
 # All code must be written before the mainloop.
 app.mainloop()
+
 
 
