@@ -3,6 +3,8 @@ from CTkMessagebox import *
 from scipy import stats
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.lines import Line2D
+from matplotlib.patches import Patch
 import math
 
 
@@ -315,7 +317,7 @@ class LinearRegr:
                 result = 'Good'
             elif self.predicted < 64 and self.predicted >= 55:
                 print('You received', str(self.predicted) + '%' + ',', ' which is a Competent')
-                color = '#ffffff'
+                color = '#ff9900'
                 result = 'Competent'
             elif self.predicted < 55 and self.predicted >= 46:
                 print('You received', str(self.predicted) + '%' + ',', ' which is a Satisfactory')
@@ -347,13 +349,27 @@ class LinearRegr:
 
             # Prepare the graph by scattering the data and plotting the line.
 
-            fig_1 = Figure(figsize=(6.2, 3.4))
+            fig_1 = Figure(figsize=(6.2, 3.9))
             ax_1 = fig_1.add_subplot()
-            ax_1.scatter(self.x, self.y)
+            ax_1.scatter(self.x, self.y, color='#0fa4af')
             ax_1.plot(self.x, self.mymodel, color='green')
-            ax_1.plot(self.x_value, self.y_value, marker='D', color='red')
+            ax_1.plot(self.x_value, self.y_value, marker='D', color=color)
+            ax_1.set_xlabel('Given Grades (as percentiles)', font= ('sans serif'))
+            ax_1.set_ylabel('Predicted Grades (as percentiles)', font= ('sans serif'))
+            ax_1.set_title('Graph comparing the predicted grades to the given grades')
+            #ax_1.xlabel('Given Grades (as percentiles')
+            '''ax_1.annotate('Your Grade', xy=(self.x_value, self.y_value), xytext=(self.x_value + 0.05, self.y_value + 0.15),
+                        arrowprops=dict(facecolor='red', shrink=0.05),
+                        )'''
+            legend_elements = [Line2D([0], [0], color='g', lw=4, label='Line'),
+                               Line2D([0], [0], marker='o', color='w', label='Scatter',
+                                      markerfacecolor='#0fa4af', markersize=15),
+                               Line2D([0], [0], marker='D', color='w', label='Your Grade',
+                                      markerfacecolor=color, markersize=15)
+                               ]
 
             # Display the graph on the app.
+            ax_1.legend(handles=legend_elements, loc='lower right')
             canvas = FigureCanvasTkAgg(fig_1, master=self.frame_toconfig)
             canvas.draw()
-            canvas.get_tk_widget().place(relx=.5, rely=.43)
+            canvas.get_tk_widget().place(relx=.5, rely=.42)

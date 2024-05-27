@@ -13,7 +13,7 @@ It contains the __init__ function and the button function.
 class App():
 
     '''
-        Once class app is called __init__ states and places the different ui elements onto the app.
+        Once class app is called, __init__ states and places the different ui elements onto the app.
     '''
 
     def __init__(self):
