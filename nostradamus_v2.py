@@ -1,7 +1,7 @@
 # imports
 import customtkinter
 from customtkinter import *
-from linear_regr import LinearRegr
+from Scripts.linear_regr import LinearRegr
 
 
 '''This is the App class which contains all the UI functions 
@@ -10,7 +10,7 @@ It contains the __init__ function and the button function.
 '''
 
 
-class App(customtkinter.CTk):
+class App():
 
     '''
         Once class app is called __init__ states and places the different ui elements onto the app.
