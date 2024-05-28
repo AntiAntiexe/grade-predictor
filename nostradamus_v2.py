@@ -4,16 +4,17 @@ from customtkinter import *
 from Scripts.linear_regr import LinearRegr
 
 
-'''This is the App class which contains all the UI functions 
-    
+'''
+This is the App class which contains all the UI functions 
+
 It contains the __init__ function and the button function.
 '''
 
 
-class App():
+class App:
 
     '''
-        Once class app is called, __init__ states and places the different ui elements onto the app.
+        Once class app is called, __init__ states and places the different ui elements onto the app.,
     '''
 
     def __init__(self):
@@ -29,7 +30,7 @@ class App():
         # Frames
         self.frame = CTkFrame(master=self.app, fg_color='#323231', border_color='#323231', border_width=2, width=2560,
                               height=1600, )
-        self.frame.place(relx=.5, rely=.5, anchor=CENTER)
+        self.frame.place(relx=.5, rely=.5, anchor=CENTER),
 
         self.frame2 = CTkFrame(master=self.app, fg_color='#323231', bg_color='#323231', border_color='#323231',
                                border_width=2,
@@ -59,7 +60,11 @@ class App():
         self.label1.place(relx=0.35, rely=0.35, anchor=CENTER)
 
         self.label2 = CTkLabel(master=self.frame,
-                               text="The Nostradamus is an accurate grade predictor. This grade predictor uses a data base of 1,188 grades collected from a reliable source developed for machine learning applications. This can be used by inputting your two recent grades which will predict your third grade. It will also display the graph used to predict your grade with your grade highlighted!",
+                               text='The Nostradamus is an "accurate" grade predictor. This grade predictor uses a data '
+                                    "base of 1,188 grades collected from a reliable source developed for machine "
+                                    "learning applications. This can be used by inputting your two recent grades which "
+                                    "will predict your third grade. It will also display the graph used to predict "
+                                    "your grade with your grade highlighted!",
                                wraplength=550, justify='left', font=self.my_font2, width=20, height=25)
         self.label2.place(relx=0.36, rely=0.49, anchor=CENTER)
 
@@ -71,29 +76,18 @@ class App():
 
         self.linear = LinearRegr(self, self.entry, self.entry2, self.frame, self.label3, self.label4)
 
-
     '''
         When called it will place the button on the frame. 
         Once clicked it will activate the predict function from class LinearRegr.
     '''
     def button(self):
         self.btn = CTkButton(master=self.frame, text="Submit", command=self.linear.predict, fg_color="#0fa4af",
-                                border_color='#0d737a',
-                                border_width=2, hover_color='#024950', text_color="#323231", height=40,
-                                font=(self.my_font2, 25))
+                             border_color='#0d737a',
+                             border_width=2, hover_color='#024950', text_color="#323231", height=40,
+                             font=(self.my_font2, 25))
         self.btn.place(relx=0.284, rely=0.7, anchor='s')
 
         self.app.mainloop()
 
 
-
-
-
 App().button()
-
-
-
-
-
-
-

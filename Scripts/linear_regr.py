@@ -4,14 +4,17 @@ from scipy import stats
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
 import math
 
 
 class LinearRegr:
 
     '''
-        Once LinearRegr is called in nostradamus_v2. It states all the variables used in the processes
+        Once LinearRegr is called in nostradamus_v2. __init__ defines all the variables needed for the processes:
+        - the values from the entry boxes
+        - the labels which have to change to display the grade
+        - the frame which the labels have to configure on to display the grade
+        - and finally the app class, so it can use the variables from nostradamus_v2.App class
     '''
 
     def __init__(self, app, val1, val2, frame_toconfig, label_toconfig1, label_toconfig2):
@@ -267,6 +270,12 @@ class LinearRegr:
     '''
 
     def predict(self):
+        '''
+                Define the different errors that could occur during the program
+                        - user enters a number less than 0
+                        - user enters a number greater than 100
+                        - user enters a string which contains letters or other symbols
+        '''
         if self.val1.get().isnumeric() != True or self.val2.get().isnumeric() != True:
             CTkMessagebox(title="That's an Error!", message="Please enter only a number")
         elif int(self.val1.get()) > 100 or int(self.val2.get()) > 100:
@@ -294,15 +303,11 @@ class LinearRegr:
             self.y_value = (self.predict + self.predict2)/2
 
             self.predicted = math.trunc(self.y_value * 100)
-            '''
-                    Define the different errors that could occur during the program
-                        - enters a number less than 0
-                        - enters a number greater than 100
-            '''
+
             if self.predicted >= 91:
                 print('You received', str(self.predicted) + '%' + ',', 'which is an Outstanding')
                 color = '#00ff00'
-                result = 'Oustanding'
+                result = 'Outstanding'
             elif self.predicted < 91 and self.predicted >= 82:
                 print('You received', str(self.predicted) + '%' + ',', ' which is an Excellent')
                 color = '#00ffff'
@@ -353,23 +358,19 @@ class LinearRegr:
             ax_1 = fig_1.add_subplot()
             ax_1.scatter(self.x, self.y, color='#0fa4af')
             ax_1.plot(self.x, self.mymodel, color='green')
-            ax_1.plot(self.x_value, self.y_value, marker='D', color=color)
-            ax_1.set_xlabel('Given Grades (as percentiles)', font= ('sans serif'))
-            ax_1.set_ylabel('Predicted Grades (as percentiles)', font= ('sans serif'))
+            ax_1.plot(self.x_value, self.y_value, marker='D', color=color, markersize=8)
+            ax_1.set_xlabel('Given Grades (as percentiles)', font='sans serif')
+            ax_1.set_ylabel('Predicted Grades (as percentiles)', font='sans serif')
             ax_1.set_title('Graph comparing the predicted grades to the given grades')
-            #ax_1.xlabel('Given Grades (as percentiles')
-            '''ax_1.annotate('Your Grade', xy=(self.x_value, self.y_value), xytext=(self.x_value + 0.05, self.y_value + 0.15),
-                        arrowprops=dict(facecolor='red', shrink=0.05),
-                        )'''
             legend_elements = [Line2D([0], [0], color='g', lw=4, label='Line'),
                                Line2D([0], [0], marker='o', color='w', label='Scatter',
-                                      markerfacecolor='#0fa4af', markersize=15),
+                                      markerfacecolor='#0fa4af', markersize=12),
                                Line2D([0], [0], marker='D', color='w', label='Your Grade',
-                                      markerfacecolor=color, markersize=15)
+                                      markerfacecolor=color, markersize=12)
                                ]
 
             # Display the graph on the app.
             ax_1.legend(handles=legend_elements, loc='lower right')
             canvas = FigureCanvasTkAgg(fig_1, master=self.frame_toconfig)
             canvas.draw()
-            canvas.get_tk_widget().place(relx=.5, rely=.42)
+            canvas.get_tk_widget().place(relx=.5, rely=.420)
