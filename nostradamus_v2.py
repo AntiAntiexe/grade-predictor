@@ -1,7 +1,7 @@
 # imports
 import customtkinter
 from customtkinter import *
-from Scripts.linear_regr import LinearRegr
+from Scripts.linearRegrUtils import LinearRegr, Utils
 
 
 '''
@@ -34,8 +34,8 @@ class App:
 
         self.frame2 = CTkFrame(master=self.app, fg_color='#323231', bg_color='#323231', border_color='#323231',
                                border_width=2,
-                               width=260, height=181, )
-        self.frame2.place = self.frame2.place(relx=.32, rely=.75, anchor=CENTER)
+                               width=200, height=181, )
+        self.frame2.place = self.frame2.place(relx=.36, rely=.75, anchor=CENTER)
 
         # fonts
         self.my_font = customtkinter.CTkFont(family="sans serif", size=75, weight="bold", )
@@ -69,25 +69,38 @@ class App:
         self.label2.place(relx=0.36, rely=0.49, anchor=CENTER)
 
         self.label3 = CTkLabel(master=self.frame2, text="0%", font=self.my_font, text_color='#0fa4af')
-        self.label3.place(relx=0.6, rely=0.3, anchor=CENTER)
+        self.label3.place(relx=0.5, rely=0.3, anchor=CENTER)
 
         self.label4 = CTkLabel(master=self.frame2, text="Your Result", font=self.my_font2)
-        self.label4.place(relx=0.6, rely=0.6, anchor=CENTER)
+        self.label4.place(relx=0.5, rely=0.6, anchor=CENTER)
 
         self.linear = LinearRegr(self, self.entry, self.entry2, self.frame, self.label3, self.label4)
 
-    '''
-        When called it will place the button on the frame. 
-        Once clicked it will activate the predict function from class LinearRegr.
-    '''
-    def button(self):
-        self.btn = CTkButton(master=self.frame, text="Submit", command=self.linear.predict, fg_color="#0fa4af",
-                             border_color='#0d737a',
-                             border_width=2, hover_color='#024950', text_color="#323231", height=40,
-                             font=(self.my_font2, 25))
-        self.btn.place(relx=0.284, rely=0.7, anchor='s')
+        self.util = Utils(self, self.entry, self.entry2)
 
+    '''
+           When called it will place the button on the frame. 
+           Once clicked it will activate the predict function from class LinearRegr.
+    '''
+    def buttons(self):
+        self.btn_reset = CTkButton(master=self.frame, text="Reset", command=self.util.reset, fg_color="#0fa4af",
+                                   border_color='#0d737a',
+                                   border_width=2, hover_color='#024950', text_color="#323231", height=40,
+                                   font=(self.my_font2, 25))
+        self.btn_reset.place(relx=.35, rely=.7, anchor='s')
+
+
+
+        self.btn_submit = CTkButton(master=self.frame, text="Submit", command=self.linear.predict, fg_color="#0fa4af",
+                                   border_color='#0d737a',
+                                   border_width=2, hover_color='#024950', text_color="#323231", height=40,
+                                   font=(self.my_font2, 25))
+        self.btn_submit.place(relx=0.284, rely=0.7, anchor='s')
         self.app.mainloop()
 
+    def reset_button2(self):
+        print('hello')
 
-App().button()
+
+App().buttons()
+
