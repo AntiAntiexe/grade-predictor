@@ -354,7 +354,7 @@ class LinearRegr:
 
             # Prepare the graph by scattering the data and plotting the line.
 
-            fig_1 = Figure(figsize=(6.2, 3.9))
+            fig_1 = Figure(figsize=(7.8, 5.9))
             ax_1 = fig_1.add_subplot()
             ax_1.scatter(self.x, self.y, color='#0fa4af')
             ax_1.plot(self.x, self.mymodel, color='green')
@@ -374,6 +374,10 @@ class LinearRegr:
             canvas = FigureCanvasTkAgg(fig_1, master=self.frame_toconfig)
             canvas.draw()
             canvas.get_tk_widget().place(relx=.5, rely=.420)
+'''
+The utils class is the class for the reset button
+Once called it states the variables that are changed and the reset function clears the entry boxes.
+'''
 class Utils:
     def __init__(self, app, entry, entry2 ):
         self.entry = entry

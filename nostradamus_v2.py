@@ -1,4 +1,3 @@
-# imports
 import customtkinter
 from customtkinter import *
 from Scripts.linearRegrUtils import LinearRegr, Utils
@@ -60,13 +59,11 @@ class App:
         self.label1.place(relx=0.35, rely=0.35, anchor=CENTER)
 
         self.label2 = CTkLabel(master=self.frame,
-                               text='The Nostradamus is an "accurate" grade predictor. This grade predictor uses a data '
-                                    "base of 1,188 grades collected from a reliable source developed for machine "
-                                    "learning applications. This can be used by inputting your two recent grades which "
+                               text='The Nostradamus is an "accurate" grade predictor. This can be used by inputting your two recent grades which '
                                     "will predict your third grade. It will also display the graph used to predict "
                                     "your grade with your grade highlighted!",
                                wraplength=550, justify='left', font=self.my_font2, width=20, height=25)
-        self.label2.place(relx=0.36, rely=0.49, anchor=CENTER)
+        self.label2.place(relx=0.36, rely=0.46, anchor=CENTER)
 
         self.label3 = CTkLabel(master=self.frame2, text="0%", font=self.my_font, text_color='#0fa4af')
         self.label3.place(relx=0.5, rely=0.3, anchor=CENTER)
@@ -79,8 +76,11 @@ class App:
         self.util = Utils(self, self.entry, self.entry2)
 
     '''
-           When called it will place the button on the frame. 
-           Once clicked it will activate the predict function from class LinearRegr.
+           When called it will place the submit button and the reset button on the frame. 
+           Once the submit button is clicked it will activate the predict function from class LinearRegr.
+           Once the reset button is clicked it will activate the reset function from the utils class
+           
+           
     '''
     def buttons(self):
         self.btn_reset = CTkButton(master=self.frame, text="Reset", command=self.util.reset, fg_color="#0fa4af",
@@ -103,4 +103,5 @@ class App:
 
 
 App().buttons()
+
 
