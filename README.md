@@ -1,5 +1,5 @@
 # The Nostradamus
-The Nostradamus is an "accurate" grade predictor. Based of a data set of over 1,000 grades. The Nostradamus can calculate a person's third grade based on their 1st and 2nd. 
+The Nostradamus is an "accurate" grade predictor. Based of a data set of over 1,000 grades. The Nostradamus can calculate a person's third grade based on their 1st and 2nd. This was all made for a school assignment. 
 
 It uses CustomTkinter to create a modern Ui. I opted for the use of CTk instead of Tkinter, even though Tk has more infrastructure built already. But CTk is slowly developing and I think it was the right choice to make. 
 
